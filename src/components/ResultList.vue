@@ -14,7 +14,7 @@
         </div>
         <div class="card_min_content">
             <a href="#" class="card_min_img">
-                <img :src="p.image_urls ? p.image_urls[0] : ''" alt="">
+                <img :src="p.images ? p.images[0].thumbnails.category.url : ''" alt="">
             </a>
             <h3 class="card_min_title">{{ p.name }}</h3>
             <a href="#" class="add_comment">
@@ -63,12 +63,12 @@ export default {
     computed: {
         ...mapGetters({
             products: 'allProducts'
-    })
+        })
     },
     created () {
         this.$store.dispatch('GET_ALL_PRODUCTS', {
             page: undefined,
-            typePagination: 'next'
+            typePagination: 'start'
         })
     }
 }

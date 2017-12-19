@@ -12,9 +12,9 @@ const state = {
 // getters
 const getters = {
   allProducts: state => state.products._items,
-  nextPage: state => state.products._links.next.href,
-  currentPage: state => state.products._meta.page,
-  lastPage: state => state.products._links.last.href
+  nextPageHref: state => state.products._links.next.href,
+  currentPagePosition: state => state.products._meta.page,
+  lastPageHref: state => state.products._links.last.href
 }
 
 // actions
@@ -34,7 +34,11 @@ const actions = {
 // mutations
 const mutations = {
   RECEIVE_PRODUCTS: (state, {response, typePagination}) => {
-    state.products = response
+    if (typePagination === 'start') {
+      state.products = response
+    } else if (typePagination === 'plus') {
+      state.products._items = [...state.products._items, ...response._items]
+    }
   }
 }
 
