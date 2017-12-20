@@ -1,13 +1,31 @@
 var path = require('path')
 var webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    // publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: 'index-template.html'
+  }),
+    new CopyWebpackPlugin([
+      {
+          from: 'src/css', 
+          to: 'css' 
+      },{
+          from: 'src/fonts', 
+          to: 'fonts' 
+      },{
+        from: 'src/img', 
+        to: 'img' 
+    }]),
+  ],
   module: {
     rules: [
       {
