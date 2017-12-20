@@ -38,6 +38,8 @@ const mutations = {
       state.products = response
     } else if (typePagination === 'plus') {
       state.products._items = [...state.products._items, ...response._items]
+      state.products._links = response._links
+      state.products._meta = response._meta
     }
   }
 }
