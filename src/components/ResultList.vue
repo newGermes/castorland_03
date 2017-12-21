@@ -60,6 +60,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+    name: 'result-list',
     computed: {
         ...mapGetters({
             products: 'allProducts'
