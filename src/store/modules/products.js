@@ -2,11 +2,11 @@ import { getProducts } from '../../api'
 
 // initial state
 const state = {
-    products: {
-      _items:[],
-      _links:{},
-      _meta: {} 
-    }
+  products: {
+    _items:[],
+    _links:{},
+    _meta: {} 
+  }
 }
 
 // getters
