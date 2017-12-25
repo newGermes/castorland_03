@@ -4,10 +4,10 @@
             <i class="icon-reload"></i>Показать еще 25 товаров
         </button>
         <div class="pagination_page">
-            <span class="btn_red_right active"> {{ pagePosition}} </span>
+            <span class="btn_red_right active"> {{ pagePosition || 1}} </span>
             <span class="btn_red_right">2</span>
             <span class="btn_red_right">...</span>
-            <span class="btn_red_right"> {{ lastPosition }} </span>
+            <span class="btn_red_right"> {{ lastPosition || 4}} </span>
         </div>
 
     </div>
