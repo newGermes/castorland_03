@@ -37,23 +37,6 @@ const actions = {
       .catch(error => {
         console.error(`Error in ACTIONS: GET_ALL_PRODUCTS ${error}`)
       })
-  },
-  GET_CURRENT_PAGE: ({ commit, getters }, { number, typePagination }) => {
-    getCurrentPage(number)
-      .then(response => {
-        // response = response.data;        
-        commit('RECEIVE_PRODUCTS', {
-          response: response.data, 
-          typePagination
-        })
-        commit('SET_PAGINATION', { 
-          index: getters.currentPagePosition,
-          length: getters.lastPagePosition
-         })
-      })
-      .catch(error => {
-        console.error(`Error in ACTIONS: GET_CURRENT_PAGE ${error}`)
-      })
   }
 }
 

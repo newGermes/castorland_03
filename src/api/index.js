@@ -1,11 +1,10 @@
 import axios from 'axios'
 
 const _api = 'http://test.nv4hqsgnvx.eu-central-1.elasticbeanstalk.com/';
+const _productParam = 'products?where={"catalogs":"castorland"}&page=';
 
-export function getProducts(page = 'products?where={"catalogs":"castorland"}') {
-    return axios.get(_api + page);
-}
-
-export function getCurrentPage(number) {
-    return axios.get(_api + `products?where={"catalogs":"castorland"}&page=${number}`);
+export function getProducts(page = _productParam) {
+    return toString.call(page) === '[object String]' 
+        ? axios.get(_api + page)
+        : axios.get(_api + _productParam + page)
 }
