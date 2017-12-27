@@ -22,10 +22,10 @@
                 <span>оставить отзыв</span>
             </a>
             <div class="card_min_price">
-                <span class="old">{{ p.price.retail * 1.3 }}
+                <span class="old">{{p.price ? p.price.retail * 1.3 : '' }}
                     <span>ГРН</span>
                 </span>
-                <span class="new">{{ p.price.retail }}
+                <span class="new">{{p.price ? p.price.retail : ''}}
                     <span>ГРН</span>
                 </span>
             </div>
@@ -42,7 +42,7 @@
             <p class="card_min_age">Для девочек 
                {{p.meta["Возраст"] ? p.meta["Возраст"][0] : '' }}
             <p class="card_min_detail">Тема:
-                <span> {{ p.meta["Тематика"][0] }} </span>
+                <span> {{ p.meta["Тематика"] ? p.meta["Тематика"][0] : '' }} </span>
             </p>
             <p class="card_min_detail">Элементов в пазле:
                 <span> {{ p.meta["Количество деталей"] ? p.meta["Количество деталей"][0] : ''}} </span>
@@ -69,7 +69,7 @@ export default {
     created () {
         this.$store.dispatch('GET_ALL_PRODUCTS', {
             page: undefined,
-            typePagination: 'start'
+            typePagination: 'next'
         })
     }
 }

@@ -7,5 +7,5 @@ export function getProducts(page = 'products?where={"catalogs":"castorland"}') {
 }
 
 export function getCurrentPage(number) {
-    return axios.get(_api + `products?where={\"catalogs\":\"castorland\"}&page=${number}`);
+    return axios.get(_api + `products?where={"catalogs":"castorland"}&page=${number}`);
 }
