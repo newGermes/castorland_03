@@ -19,7 +19,9 @@ export function getProducts(page) {
         axios.get(query)
             .then(response => {
                 for (let key in adapter) adapter[key] = response.data[`_${key}`]
-                adapter.meta.last_page = Math.ceil(adapter.meta.total / adapter.meta.max_results)
+                adapter.meta.last_page = Math.ceil(
+                    adapter.meta.total / adapter.meta.max_results
+                )
                 resolve(adapter)
             })
             .catch(error => {
