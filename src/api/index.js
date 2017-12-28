@@ -18,9 +18,7 @@ export function getProducts(page) {
             : query = _api + _productParam + page 
         axios.get(query)
             .then(response => {
-                adapter.items = response.data._items
-                adapter.links = response.data._links
-                adapter.meta = response.data._meta
+                for (let key in adapter) adapter[key] = response.data[`_${key}`]
                 adapter.meta.last_page = Math.ceil(adapter.meta.total / adapter.meta.max_results)
                 resolve(adapter)
             })
