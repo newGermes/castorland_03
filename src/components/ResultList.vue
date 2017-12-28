@@ -22,7 +22,7 @@
                 <span>оставить отзыв</span>
             </a>
             <div class="card_min_price">
-                <span class="old">{{p.price ? (p.price.retail * 1.3).toFixed(0) : '' }}
+                <span class="old">{{p.price ? p.price.retail * 1.3 : '' }}
                     <span>ГРН</span>
                 </span>
                 <span class="new">{{p.price ? p.price.retail : ''}}

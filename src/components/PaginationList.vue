@@ -1,11 +1,23 @@
 <template>
     <div class="pagination">
-        <button @click="getPage(nextPage, 'plus')" class="pagination_more active">
-            <i class="icon-reload"></i>Показать еще 25 товаров
+        <button class="pagination_more"
+                :class="{ active: isLoad }"
+                @click="getPage(nextPage, 'plus')"
+                v-if="nextPage"
+            >
+        <i class="icon-reload"></i>
+            Показать еще 25 товаров
         </button>
         <div class="pagination_page">
-            <span v-for="p in pages" :key="p.index">
-                <span class="btn_red_right" :class="{ active: p.active }" @click="getPage(p.index, 'next')"> {{ p.index }} </span>
+            <span v-for="p in pages" 
+                    :key="p.index"
+                >
+                <span class="btn_red_right" 
+                        :class="{ active: p.active }"
+                        @click="getPage(p.index, 'next')"
+                    > 
+                    {{ p.index }} 
+                </span>
             </span>
         </div>
 
@@ -25,7 +37,8 @@ export default {
     computed: {
         ...mapGetters({
             nextPage: 'nextPageHref',
-            pages: 'pagePagination'
+            pages: 'pagePagination',
+            isLoad: 'isLoad'
         })
     },
     methods: {

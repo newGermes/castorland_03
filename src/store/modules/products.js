@@ -3,35 +3,45 @@ import { getProducts, getCurrentPage } from '../../api'
 // initial state
 const state = {
   products: {
-    _items:[],
-    _links:{},
-    _meta: {},
-    _pagination: []
+    items:[],
+    links:{},
+    meta: {},
+    pagination: [],
+    isLoad: false
   }
 }
 
 // getters
 const getters = {
-  allProducts: state => state.products._items,
-  pagePagination: state => state.products._pagination,
-  nextPageHref: state => state.products._links.next.href,
-  currentPagePosition: state => state.products._meta.page,
-  lastPagePosition: state => Math.ceil( state.products._meta.total / state.products._meta.max_results )
+  allProducts: state => state.products.items,
+  pagePagination: state => state.products.pagination,
+  nextPageHref: state => state.products.links.next 
+                          ? state.products.links.next.href
+                          : false,
+  currentPagePosition: state => state.products.meta.page,
+  lastPagePosition: state => state.products.meta.last_page,
+  isLoad: state => state.products.isLoad
 }
 
 // actions
 const actions = {
   GET_ALL_PRODUCTS: ({ commit, getters }, { page, typePagination }) => {
+    commit('SET_LOAD', { 
+      flag: true 
+    })
     getProducts(page)
       .then(response => {
         commit('RECEIVE_PRODUCTS', {
-          response: response.data, 
+          response, 
           typePagination
         })
         commit('SET_PAGINATION', { 
           index: getters.currentPagePosition,
           length: getters.lastPagePosition
          })
+        commit('SET_LOAD', { 
+          flag: false
+        })
       })
       .catch(error => {
         console.error(`Error in ACTIONS: GET_ALL_PRODUCTS ${error}`)
@@ -41,25 +51,25 @@ const actions = {
 
 // mutations
 const mutations = {
-  RECEIVE_PRODUCTS: (state, {response, typePagination}) => {
+  RECEIVE_PRODUCTS: (state, { response, typePagination }) => {
     if (typePagination === 'next') {
       for (let key in response) state.products[key] = response[key]
     } else if (typePagination === 'plus') {
-      for (let key in response) key === '_items' 
-        ? state.products[key] = [...state.products[key], ...response[key]]
+      for (let key in response) key === 'items' 
+        ? state.products[key].push(...response[key])
         : state.products[key] = response[key]
     }
   },
   SET_PAGINATION: (state, {  index, length }) => {
-    state.products._pagination.length = 0;
+    state.products.pagination.length = 0;
     for (let i = 1; i <= length; i++) {
-      if (i === index) {
-        state.products._pagination.push({ index: i, active: true });
-      } else {
-        state.products._pagination.push({ index: i, active: false });
-      }
-      
+      i === index
+        ? state.products.pagination.push({ index: i, active: true })
+        : state.products.pagination.push({ index: i, active: false }) 
     }
+  },
+  SET_LOAD: (state, { flag }) => {
+    state.products.isLoad = flag
   }
 }
 
