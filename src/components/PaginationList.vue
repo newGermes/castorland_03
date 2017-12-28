@@ -4,7 +4,6 @@
             <i class="icon-reload"></i>Показать еще 25 товаров
         </button>
         <div class="pagination_page">
-            <!-- <span class="btn_red_right active"> {{ pagePosition || 1}} </span>-->
             <span v-for="p in pages" :key="p.index">
                 <span class="btn_red_right" :class="{ active: p.active }" @click="getPage(p.index, 'next')"> {{ p.index }} </span>
             </span>
