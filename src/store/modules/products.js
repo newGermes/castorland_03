@@ -1,11 +1,11 @@
-import { getProducts, getCurrentPage } from '../../api'
+import { getProducts } from '../../api'
 
 // initial state
 const state = {
   products: {
-    items:[],
-    links:{},
-    meta: {},
+    items: [],
+    links: {},
+    meta:  {},
     pagination: [],
     isLoad: false
   }
