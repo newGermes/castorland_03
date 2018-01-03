@@ -1,7 +1,7 @@
 <template>
   <div class="result_list_filter">
     <div
-        v-for="p in products" 
+        v-for="p in products"
         class="card_min"
         :key="p.id"
         >
@@ -41,21 +41,21 @@
                 <div class="ok_deliver"></div> Доставка
                 <span> 1-3 </span> дня
             </div>
-            <p class="card_min_age">Для девочек 
+            <p class="card_min_age">Для девочек
                {{ p.meta_age }}
             <p class="card_min_detail">Тема:
-                <span> 
-                    {{ p.meta_subject}} 
+                <span>
+                    {{ p.meta_subject}}
                 </span>
             </p>
             <p class="card_min_detail">Элементов в пазле:
-                <span> 
+                <span>
                     {{ p.meta_quantity }}
                 </span>
             </p>
             <p class="card_min_detail">Размер пазла:
-                <span> 
-                    {{ p.meta_size }} 
+                <span>
+                    {{ p.meta_size }}
                 </span>
             </p>
         </div>
@@ -75,7 +75,7 @@ export default {
         })
     },
     created () {
-        this.$store.dispatch('GET_ALL_PRODUCTS', {
+        this.$store.dispatch('FETCH_ALL_DATA', {
             page: 1,
             typePagination: 'next'
         })

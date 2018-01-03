@@ -25,31 +25,37 @@ const getters = {
 
 // actions
 const actions = {
-  GET_ALL_PRODUCTS: ({ commit, getters }, { page, typePagination }) => {
-    typePagination === 'plus' ? commit('SET_ANIMATION_BUTTON', { flag: true }) : false
+  FETCH_ALL_DATA: ({ commit, dispatch, getters }, { page, typePagination }) => {
+    typePagination === 'plus' ? dispatch('ENSURE__ANIMATION_BUTTON', { flag: true }) : false
     getProducts(page)
       .then(response => {
-        commit('RECEIVE_PRODUCTS', {
+        commit('SET_ITEMS', {
           response,
           typePagination
         })
-        commit('SET_NUMERIC_PAGINATION', {
-          index: getters.currentNumericPagePosition,
-          length: getters.lastNumericPagePosition
-         })
-        commit('SET_ANIMATION_BUTTON', {
+        dispatch('ENSURE_NUMERIC_PAGINATION')
+        dispatch('ENSURE__ANIMATION_BUTTON', {
           flag: false
         })
       })
       .catch(error => {
         console.error(`Error in ACTIONS: GET_ALL_PRODUCTS ${error}`)
       })
+  },
+  ENSURE_NUMERIC_PAGINATION: ({ commit, getters }) => {
+    commit('SET_NUMERIC_PAGINATION', {
+      index: getters.currentNumericPagePosition,
+      length: getters.lastNumericPagePosition
+     })
+  },
+  ENSURE__ANIMATION_BUTTON: ({ commit }, { flag }) => {
+    commit('SET_ANIMATION_BUTTON', { flag })
   }
 }
 
 // mutations
 const mutations = {
-  RECEIVE_PRODUCTS: (state, { response, typePagination }) => {
+  SET_ITEMS: (state, { response, typePagination }) => {
     if (typePagination === 'next') {
       for (let key in response) state.products[key] = response[key]
     } else if (typePagination === 'plus') {

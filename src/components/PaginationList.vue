@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         getPage(page, typePagination) {
-            return this.$store.dispatch('GET_ALL_PRODUCTS', {
+            return this.$store.dispatch('FETCH_ALL_DATA', {
                 page,
                 typePagination
             })
