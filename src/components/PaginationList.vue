@@ -2,8 +2,8 @@
     <div class="pagination">
         <button class="pagination_more"
                 :class="{ active: stateMoreButton }"
-                @click="getPage(nextPage, 'plus')"
-                v-if="nextPage"
+                @click="getPage(nextReferencePage, 'plus')"
+                v-if="nextReferencePage"
             >
         <i class="icon-reload"></i>
             Показать еще 25 товаров
@@ -35,11 +35,11 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            nextPage: 'nextReferencePage',
-            stateNumericPagination: 'stateNumericPagination',
-            stateMoreButton: 'stateMoreButton'
-        })
+        ...mapGetters([
+            'nextReferencePage',
+            'stateNumericPagination',
+            'stateMoreButton'
+        ])
     },
     methods: {
         getPage(page, typePagination) {

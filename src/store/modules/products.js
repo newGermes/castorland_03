@@ -34,9 +34,7 @@ const actions = {
           typePagination
         })
         dispatch('ENSURE_NUMERIC_PAGINATION')
-        dispatch('ENSURE_ANIMATION_BUTTON', {
-          flag: false
-        })
+        dispatch('ENSURE_ANIMATION_BUTTON', { flag: false })
       })
       .catch(error => {
         console.error(`Error in ACTIONS: GET_ALL_PRODUCTS ${error}`)
