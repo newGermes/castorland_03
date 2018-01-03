@@ -5,41 +5,39 @@ const state = {
   products: {
     items: [],
     links: {},
-    meta:  {},
-    pagination: [],
-    isLoad: false
+    meta: {},
+    numericPagination: [],
+    animatedMoreButton: false
   }
 }
 
 // getters
 const getters = {
   allProducts: state => state.products.items,
-  pagePagination: state => state.products.pagination,
-  nextPageHref: state => state.products.links.next 
+  nextReferencePage: state => state.products.links.next
                           ? state.products.links.next.href
                           : false,
-  currentPagePosition: state => state.products.meta.page,
-  lastPagePosition: state => state.products.meta.last_page,
-  isLoad: state => state.products.isLoad
+  currentNumericPagePosition: state => state.products.meta.page,
+  lastNumericPagePosition: state => state.products.meta.last_page,
+  stateNumericPagination: state => state.products.numericPagination,
+  stateMoreButton: state => state.products.animatedMoreButton
 }
 
 // actions
 const actions = {
   GET_ALL_PRODUCTS: ({ commit, getters }, { page, typePagination }) => {
-    commit('SET_LOAD', { 
-      flag: true 
-    })
+    typePagination === 'plus' ? commit('SET_ANIMATION_BUTTON', { flag: true }) : false
     getProducts(page)
       .then(response => {
         commit('RECEIVE_PRODUCTS', {
-          response, 
+          response,
           typePagination
         })
-        commit('SET_PAGINATION', { 
-          index: getters.currentPagePosition,
-          length: getters.lastPagePosition
+        commit('SET_NUMERIC_PAGINATION', {
+          index: getters.currentNumericPagePosition,
+          length: getters.lastNumericPagePosition
          })
-        commit('SET_LOAD', { 
+        commit('SET_ANIMATION_BUTTON', {
           flag: false
         })
       })
@@ -55,21 +53,21 @@ const mutations = {
     if (typePagination === 'next') {
       for (let key in response) state.products[key] = response[key]
     } else if (typePagination === 'plus') {
-      for (let key in response) key === 'items' 
+      for (let key in response) key === 'items'
         ? state.products[key].push(...response[key])
         : state.products[key] = response[key]
     }
   },
-  SET_PAGINATION: (state, {  index, length }) => {
-    state.products.pagination.length = 0;
+  SET_NUMERIC_PAGINATION: (state, {  index, length }) => {
+    state.products.numericPagination.length = 0;
     for (let i = 1; i <= length; i++) {
       i === index
-        ? state.products.pagination.push({ index: i, active: true })
-        : state.products.pagination.push({ index: i, active: false }) 
+        ? state.products.numericPagination.push({ index: i, active: true })
+        : state.products.numericPagination.push({ index: i, active: false })
     }
   },
-  SET_LOAD: (state, { flag }) => {
-    state.products.isLoad = flag
+  SET_ANIMATION_BUTTON: (state, { flag }) => {
+    state.products.animatedMoreButton = flag
   }
 }
 
