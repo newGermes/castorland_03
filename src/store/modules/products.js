@@ -26,7 +26,7 @@ const getters = {
 // actions
 const actions = {
   FETCH_ALL_DATA: ({ commit, dispatch, getters }, { page, typePagination }) => {
-    typePagination === 'plus' ? dispatch('ENSURE__ANIMATION_BUTTON', { flag: true }) : false
+    typePagination === 'plus' ? dispatch('ENSURE_ANIMATION_BUTTON', { flag: true }) : false
     getProducts(page)
       .then(response => {
         commit('SET_ITEMS', {
@@ -34,7 +34,7 @@ const actions = {
           typePagination
         })
         dispatch('ENSURE_NUMERIC_PAGINATION')
-        dispatch('ENSURE__ANIMATION_BUTTON', {
+        dispatch('ENSURE_ANIMATION_BUTTON', {
           flag: false
         })
       })
@@ -48,7 +48,7 @@ const actions = {
       length: getters.lastNumericPagePosition
      })
   },
-  ENSURE__ANIMATION_BUTTON: ({ commit }, { flag }) => {
+  ENSURE_ANIMATION_BUTTON: ({ commit }, { flag }) => {
     commit('SET_ANIMATION_BUTTON', { flag })
   }
 }
