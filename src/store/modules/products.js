@@ -3,9 +3,11 @@ import { getProducts } from '../../api'
 // initial state
 const state = {
   products: {
+    /** start data from API */
     items: [],
     links: {},
     meta: {},
+    /** end data from API */
     numericPagination: [],
     animatedMoreButton: false
   }
