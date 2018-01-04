@@ -14,7 +14,7 @@
                     :key="p.index"
                     :class="{ active: p.active }"
                     @click="getPage(p.index, 'next')"
-                    v-scroll-to="'#scrollUp'"
+                    v-scroll-to="'#app'"
                 >
                  {{ p.view }}
             </span>
