@@ -9,15 +9,13 @@
             Показать еще 25 товаров
         </button>
         <div class="pagination_page">
-            <span v-for="p in stateNumericPagination"
+            <span class="btn_red_right"
+                    v-for="p in stateNumericPagination"
                     :key="p.index"
+                    :class="{ active: p.active }"
+                    @click="getPage(p.index, 'next')"
                 >
-                <span class="btn_red_right"
-                        :class="{ active: p.active }"
-                        @click="getPage(p.index, 'next')"
-                    >
-                    {{ p.index }}
-                </span>
+                 {{ p.view }}
             </span>
         </div>
 

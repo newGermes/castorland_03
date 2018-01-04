@@ -1,4 +1,5 @@
 import { getProducts } from '../../api'
+import { getNumerical } from '../../util/numericPagination'
 
 // initial state
 const state = {
@@ -9,6 +10,7 @@ const state = {
     meta: {},
     /** end data from API */
     numericPagination: [],
+    activeNumericPages: [],
     animatedMoreButton: false
   }
 }
@@ -27,8 +29,10 @@ const getters = {
 
 // actions
 const actions = {
-  FETCH_ALL_DATA: ({ commit, dispatch, getters }, { page, typePagination }) => {
-    typePagination === 'plus' ? dispatch('ENSURE_ANIMATION_BUTTON', { flag: true }) : false
+  FETCH_ALL_DATA: ({ commit, dispatch }, { page, typePagination }) => {
+    typePagination === 'plus' 
+      ? dispatch('ENSURE_ANIMATION_BUTTON', { flag: true }) 
+      : false
     getProducts(page)
       .then(response => {
         commit('SET_ITEMS', {
@@ -55,22 +59,25 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_ITEMS: (state, { response, typePagination }) => {
+  SET_ITEMS: (state, { response, typePagination}) => {
     if (typePagination === 'next') {
-      for (let key in response) state.products[key] = response[key]
+      for (let key in response) {
+        state.products[key] = response[key]
+      }
+      state.products.activeNumericPages.length = 0
     } else if (typePagination === 'plus') {
-      for (let key in response) key === 'items'
+      for (let key in response) {
+        key === 'items'
         ? state.products[key].push(...response[key])
         : state.products[key] = response[key]
+      }
+      state.products.activeNumericPages.push(state.products.meta.page)
     }
   },
   SET_NUMERIC_PAGINATION: (state, {  index, length }) => {
     state.products.numericPagination.length = 0;
-    for (let i = 1; i <= length; i++) {
-      i === index
-        ? state.products.numericPagination.push({ index: i, active: true })
-        : state.products.numericPagination.push({ index: i, active: false })
-    }
+    state.products.numericPagination 
+      = getNumerical(index, length, state.products.activeNumericPages)
   },
   SET_ANIMATION_BUTTON: (state, { flag }) => {
     state.products.animatedMoreButton = flag
