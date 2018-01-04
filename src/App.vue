@@ -2,7 +2,7 @@
   <div id="app" class="main_content_center">
     <h1 class="title_block">Настольные игры для девочек от 3 лет, тематика архитектура</h1>
     <!--begin filter settings-->
-    <div class="filter_settings">
+    <div id="scrollUp" class="filter_settings">
         <div class="filter_left">
             <div class="list_filter_setting">
                 <div class="filter_elem">

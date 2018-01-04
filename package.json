@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "vue": "*",
+    "vue-scrollto": "^2.8.0",
     "vuex": "*"
   },
   "browserslist": [
