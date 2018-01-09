@@ -24,9 +24,7 @@ export const adapter = response => {
             size: item.meta["Размер пазла"]
                         ? item.meta["Размер пазла"][0]
                         : 'no size',
-            age: item.meta["Возраст"]
-                        ? item.meta["Возраст"][0]
-                        : 'no age'
+            age: item.meta["Возраст"] ? item.meta["Возраст"][0] : 'no age'
         })
     }
     adapter.items = temp_items
