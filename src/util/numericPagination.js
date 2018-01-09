@@ -8,10 +8,10 @@ export const getNumerical = (index, length, activeNumericPages) => {
                   index + 2 > length ? 0 : index + 2,
                   index + 3 > length ? 0 : index + 3,
                   index + 4 > length ? 0 : index + 4]
-        .filter(elm => elm > 0)
-        .map(elm => (elm === index)
-                      ? { index: elm, view: elm, active: true }
-                      : { index: elm, view: elm, active: false })
+                    .filter(elm => elm > 0)
+                    .map(elm => (elm === index)
+                                  ? { index: elm, view: elm, active: true }
+                                  : { index: elm, view: elm, active: false })
 // rewrite -- start
   if (statePages[0].index !== 1) {
     statePages[0].index = statePages[0].view = 1
