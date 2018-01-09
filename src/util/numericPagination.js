@@ -25,7 +25,7 @@ export const getNumerical = (index, length, activeNumericPages) => {
             statePages[statePages.length - 1].index - 1
         statePages[statePages.length - 2].view = '...'
     }
-// rewtire end
+// rewtire -- end
     activeNumericPages.length
         ? activeNumericPages.forEach(page => {
             statePages.forEach(item => {
