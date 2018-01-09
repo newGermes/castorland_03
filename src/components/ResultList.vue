@@ -14,7 +14,7 @@
         </div>
         <div class="card_min_content">
             <a href="#" class="card_min_img">
-                <img :src="p.image_url" alt="" >
+                <img :src="p.img_url" alt="" >
             </a>
             <h3 class="card_min_title">{{ p.name }}</h3>
             <a href="#" class="add_comment">
@@ -23,11 +23,11 @@
             </a>
             <div class="card_min_price">
                 <span class="old">
-                    {{ p.price_retail * 1.3 }}
+                    {{ p.price * 1.3 }}
                     <span>ГРН</span>
                 </span>
                 <span class="new">
-                    {{ p.price_retail }}
+                    {{ p.price }}
                     <span>ГРН</span>
                 </span>
             </div>
@@ -42,20 +42,20 @@
                 <span> 1-3 </span> дня
             </div>
             <p class="card_min_age">Для девочек
-               {{ p.meta_age }}
+               {{ p.age }}
             <p class="card_min_detail">Тема:
                 <span>
-                    {{ p.meta_subject}}
+                    {{ p.subject}}
                 </span>
             </p>
             <p class="card_min_detail">Элементов в пазле:
                 <span>
-                    {{ p.meta_quantity }}
+                    {{ p.quantity }}
                 </span>
             </p>
             <p class="card_min_detail">Размер пазла:
                 <span>
-                    {{ p.meta_size }}
+                    {{ p.size }}
                 </span>
             </p>
         </div>

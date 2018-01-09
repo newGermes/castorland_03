@@ -10,21 +10,21 @@ export const adapter = response => {
     for (let item of adapter.items) {
         temp_items.push({
             id: item.id,
-            price_retail: item.price ? item.price.retail : 0,
+            price: item.price ? item.price.retail : 0,
             name: item.name ? item.name : 'no name',
-            image_url: item.images[0]
+            img_url: item.images[0]
                         ? item.images[0].thumbnails.category.url
                         : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
-            meta_subject: item.meta["Тематика"]
+            subject: item.meta["Тематика"]
                             ? item.meta["Тематика"][0]
                             : 'no subject',
-            meta_quantity: item.meta["Количество деталей"]
+            quantity: item.meta["Количество деталей"]
                             ? item.meta["Количество деталей"][0]
                             : 'no quantity',
-            meta_size: item.meta["Размер пазла"]
+            size: item.meta["Размер пазла"]
                         ? item.meta["Размер пазла"][0]
                         : 'no size',
-            meta_age: item.meta["Возраст"]
+            age: item.meta["Возраст"]
                         ? item.meta["Возраст"][0]
                         : 'no age'
         })
