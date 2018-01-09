@@ -4,40 +4,29 @@ export const adapter = response => {
         links: {},
         meta: {}
     }
-    let temp_items = [];
+    let temp_items = []
 
     for (let key in adapter) adapter[key] = response.data[`_${key}`]
     for (let item of adapter.items) {
-        let [
-            id,
-            price_retail,
-            name,
-            image_url,
-            meta_subject,
-            meta_quantity,
-            meta_size,
-            meta_age
-        ] = [
-            item.id,
-            item.price ? item.price.retail : 0,
-            item.name ? item.name : 'no name',
-            item.images[0]
-                ? item.images[0].thumbnails.category.url
-                : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
-            item.meta["Тематика"] ? item.meta["Тематика"][0] : 'no subject',
-            item.meta["Количество деталей"] ? item.meta["Количество деталей"][0] : 'no quantity',
-            item.meta["Размер пазла"] ? item.meta["Размер пазла"][0] : 'no size',
-            item.meta["Возраст"] ? item.meta["Возраст"][0] : 'no age'
-        ]
         temp_items.push({
-            id,
-            price_retail,
-            name,
-            image_url,
-            meta_subject,
-            meta_quantity,
-            meta_size,
-            meta_age
+            id: item.id,
+            price_retail: item.price ? item.price.retail : 0,
+            name: item.name ? item.name : 'no name',
+            image_url: item.images[0]
+                        ? item.images[0].thumbnails.category.url
+                        : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
+            meta_subject: item.meta["Тематика"]
+                            ? item.meta["Тематика"][0]
+                            : 'no subject',
+            meta_quantity: item.meta["Количество деталей"]
+                            ? item.meta["Количество деталей"][0]
+                            : 'no quantity',
+            meta_size: item.meta["Размер пазла"]
+                        ? item.meta["Размер пазла"][0]
+                        : 'no size',
+            meta_age: item.meta["Возраст"]
+                        ? item.meta["Возраст"][0]
+                        : 'no age'
         })
     }
     adapter.items = temp_items
