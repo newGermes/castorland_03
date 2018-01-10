@@ -6,7 +6,6 @@ export const adapter = response => {
   }
 
   for (let key in adapter) adapter[key] = response.data[`_${key}`]
-  // rewrite -- start
   adapter.items = adapter.items.map(item => ({
     id: item.id,
     price: item.price ? item.price.retail : 0,
@@ -14,18 +13,8 @@ export const adapter = response => {
     img_url: item.images[0]
                 ? item.images[0].thumbnails.category.url
                 : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg',
-    subject: item.meta["Тематика"]
-                    ? item.meta["Тематика"][0]
-                    : 'no subject',
-    quantity: item.meta["Количество деталей"]
-                    ? item.meta["Количество деталей"][0]
-                    : 'no quantity',
-    size: item.meta["Размер пазла"]
-                ? item.meta["Размер пазла"][0]
-                : 'no size',
-    age: item.meta["Возраст"] ? item.meta["Возраст"][0] : 'no age'
+    meta: item.meta
   }))
-  // rewtire -- end
 
   /**
    * add a number of the last page

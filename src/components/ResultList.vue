@@ -1,7 +1,7 @@
 <template>
   <div class="result_list_filter">
     <div
-        v-for="p in products"
+        v-for="p in allProducts"
         class="card_min"
         :key="p.id"
         >
@@ -23,7 +23,7 @@
             </a>
             <div class="card_min_price">
                 <span class="old">
-                    {{ p.price * 1.3 }}
+                    {{ p.price | $_myFilters_multiply(1.3) }}
                     <span>ГРН</span>
                 </span>
                 <span class="new">
@@ -41,21 +41,15 @@
                 <div class="ok_deliver"></div> Доставка
                 <span> 1-3 </span> дня
             </div>
-            <p class="card_min_age">Для девочек
-               {{ p.age }}
-            <p class="card_min_detail">Тема:
+            <!-- <p class="card_min_age">Для девочек
+               {{ p.age }} -->
+            <p class="card_min_detail"
+              v-for="(value, key, index) in $_myFilters_limitObjBy(p.meta, 3)"
+              :key="index"
+              >
+              {{ key }}:
                 <span>
-                    {{ p.subject}}
-                </span>
-            </p>
-            <p class="card_min_detail">Элементов в пазле:
-                <span>
-                    {{ p.quantity }}
-                </span>
-            </p>
-            <p class="card_min_detail">Размер пазла:
-                <span>
-                    {{ p.size }}
+                    {{ value | $_myFilters_slice | $_myFilters_join }}
                 </span>
             </p>
         </div>
@@ -70,9 +64,9 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'result-list',
     computed: {
-        ...mapGetters({
-            products: 'allProducts'
-        })
+        ...mapGetters([
+            'allProducts'
+        ])
     },
     created () {
         this.$store.dispatch('FETCH_ALL_DATA', {
