@@ -19,6 +19,7 @@ export const getNumerical = (index, length, activeNumericPages) => {
     let elm3 = array[2]
     let elmLast = array[array.length - 1]
     let elmPrevLast = array[array.length - 2]
+    let elmPrevPrev = array[array.length - 3]
 
     if (elmLast.index !== length && elm1.index === 1) {
       elmLast.index = elmLast.view = length
