@@ -30,8 +30,8 @@ const getters = {
 // actions
 const actions = {
   FETCH_ALL_DATA: ({ commit, dispatch }, { page, typePagination }) => {
-    typePagination === 'plus' 
-      ? dispatch('ENSURE_ANIMATION_BUTTON', { flag: true }) 
+    typePagination === 'plus'
+      ? dispatch('ENSURE_ANIMATION_BUTTON', { flag: true })
       : false
     getProducts(page)
       .then(response => {
@@ -61,22 +61,18 @@ const actions = {
 const mutations = {
   SET_ITEMS: (state, { response, typePagination}) => {
     if (typePagination === 'next') {
-      for (let key in response) {
-        state.products[key] = response[key]
-      }
+      Object.keys(response).forEach(key => state.products[key] = response[key])
       state.products.activeNumericPages.length = 0
     } else if (typePagination === 'plus') {
-      for (let key in response) {
-        key === 'items'
-        ? state.products[key].push(...response[key])
-        : state.products[key] = response[key]
-      }
+      Object.keys(response).forEach(key => key === 'items'
+                                    ? state.products[key].push(...response[key])
+                                    : state.products[key] = response[key])
       state.products.activeNumericPages.push(state.products.meta.page)
     }
   },
   SET_NUMERIC_PAGINATION: (state, {  index, length }) => {
     state.products.numericPagination.length = 0;
-    state.products.numericPagination 
+    state.products.numericPagination
       = getNumerical(index, length, state.products.activeNumericPages)
   },
   SET_ANIMATION_BUTTON: (state, { flag }) => {
