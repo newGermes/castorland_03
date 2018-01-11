@@ -1,5 +1,5 @@
 export const getNumerical = (index, length, activeNumericPages) => {
-  const stateIndexes = [index - 4 > 0 ? index - 4 : 0,
+  const stateOfIndexes = [index - 4 > 0 ? index - 4 : 0,
                   index - 3 > 0 ? index - 3 : 0,
                   index - 2 > 0 ? index - 2 : 0,
                   index - 1 > 0 ? index - 1 : 0,
@@ -43,8 +43,8 @@ export const getNumerical = (index, length, activeNumericPages) => {
   }
 
   // run functions
-  addDots(stateIndexes)
-  activateIndex(stateIndexes)
+  addDots(stateOfIndexes)
+  activateIndex(stateOfIndexes)
 
-  return stateIndexes
+  return stateOfIndexes
 }

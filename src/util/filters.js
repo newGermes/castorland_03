@@ -41,7 +41,6 @@ const myFilters = {
     Object.keys(mixins).forEach(key => {
       mixins.renameProperty(key, `$_${namePlagin}_${key}`)
     })
-
     Vue.mixin({
       methods: {
         ...mixins
