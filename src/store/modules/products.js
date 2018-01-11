@@ -64,7 +64,7 @@ const mutations = {
       Object.keys(response).forEach(key => state.products[key] = response[key])
       state.products.activeNumericPages.length = 0
     } else if (typePagination === 'plus') {
-      Object.keys(response).forEach(key => key === 'items'
+      Object.keys(response).forEach(key => (key === 'items')
                                     ? state.products[key].push(...response[key])
                                     : state.products[key] = response[key])
       state.products.activeNumericPages.push(state.products.meta.page)
