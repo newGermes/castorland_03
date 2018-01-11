@@ -12,7 +12,6 @@ export const getNumerical = (index, length, activeNumericPages) => {
                     .map(elm => (elm === index)
                                   ? { index: elm, view: elm, active: true }
                                   : { index: elm, view: elm, active: false })
-
   const addDots = array => {
     let elm1 = array[0]
     let elm2 = array[1]
@@ -21,33 +20,31 @@ export const getNumerical = (index, length, activeNumericPages) => {
     let elmPrevLast = array[array.length - 2]
     let elmPrevPrev = array[array.length - 3]
 
-    if (elmLast.index !== length && elm1.index === 1) {
+    if (elm1.index !== 1) {
+      elm1.index = elm1.view = 1
+      elm2.view = '...'
+      elm2.index = elm3.index - 1
+    }
+    if (elmLast.index !== length) {
       elmLast.index = elmLast.view = length
+      elmPrevLast.view = '...'
+      elmPrevLast.index = elmPrevPrev.index + 1
 
     }
   }
-
-// rewrite -- start
-  if (stateIndexes[0].index !== 1) {
-    stateIndexes[0].index = stateIndexes[0].view = 1
-    stateIndexes[1].index = stateIndexes[2].index - 1
-    stateIndexes[1].view = '...'
-  }
-  if (stateIndexes[stateIndexes.length - 1].index !== length) {
-    stateIndexes[stateIndexes.length - 1].index
-      = stateIndexes[stateIndexes.length - 1].view = length
-    stateIndexes[stateIndexes.length - 2].index =
-      stateIndexes[stateIndexes.length - 1].index - 1
-    stateIndexes[stateIndexes.length - 2].view = '...'
-  }
-// rewtire -- end
-  activeNumericPages.length
+  const activateIndex = array => {
+    activeNumericPages.length
     ? activeNumericPages.forEach(page => {
-        stateIndexes.forEach(item => {
+        array.forEach(item => {
           item.index === page ? item.active = true : false
         })
       })
     : activeNumericPages[0] = index
+  }
+
+  // run functions
+  addDots(stateIndexes)
+  activateIndex(stateIndexes)
 
   return stateIndexes
 }
