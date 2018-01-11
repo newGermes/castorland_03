@@ -17,6 +17,8 @@ export const getNumerical = (index, length, activeNumericPages) => {
     statePages[0].index = statePages[0].view = 1
     statePages[1].index = statePages[2].index - 1
     statePages[1].view = '...'
+  } else {
+
   }
   if (statePages[statePages.length - 1].index !== length) {
     statePages[statePages.length - 1].index
