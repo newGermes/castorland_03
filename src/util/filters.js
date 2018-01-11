@@ -3,7 +3,7 @@ import './renameProperty'
 const namePlagin = 'myFilters'
 
 // filters
-let filters = {
+const filters = {
   slice: (text, from = 0, to = 1) => {
     return text.slice(from, to)
   },
@@ -15,7 +15,7 @@ let filters = {
   }
 }
 // mixins
-let mixins = {
+const mixins = {
   limitObjBy: (object, length = 0) => {
     let sliced = {}
     let i = 0
