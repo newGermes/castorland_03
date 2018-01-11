@@ -5,7 +5,7 @@ export const adapter = response => {
       meta: {}
   }
 
-  for (let key in adapter) adapter[key] = response.data[`_${key}`]
+  Object.keys(adapter).forEach(key => adapter[key] = response.data[`_${key}`])
   adapter.items = adapter.items.map(item => ({
     id: item.id,
     price: item.price ? item.price.retail : 0,
@@ -19,9 +19,7 @@ export const adapter = response => {
   /**
    * add a number of the last page
    */
-  adapter.meta.last_page = Math.ceil(
-      adapter.meta.total / adapter.meta.max_results
-  )
+  adapter.meta.last_page = Math.ceil(adapter.meta.total/adapter.meta.max_results)
 
   return adapter
 }
