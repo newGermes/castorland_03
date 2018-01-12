@@ -29,17 +29,16 @@ export const getNumerical = (index, length, activeNumericPages) => {
       elmLast.index = elmLast.view = length
       elmPrevLast.view = '...'
       elmPrevLast.index = elmPrevPrev.index + 1
-
     }
   }
   const activateIndex = array => {
     activeNumericPages.length
-    ? activeNumericPages.forEach(page => {
-        array.forEach(item => {
-          item.index === page ? item.active = true : false
+      ? activeNumericPages.forEach(page => {
+          array.forEach(item => {
+            item.index === page ? item.active = true : false
+          })
         })
-      })
-    : activeNumericPages[0] = index
+      : activeNumericPages[0] = index
   }
 
   // run functions
