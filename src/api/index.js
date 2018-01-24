@@ -9,14 +9,14 @@ export const getProducts = (page) => new Promise((resolve, reject) => {
     let query = undefined
 
     isString
-        ? query = _api + page
-        : query = _api + _productParam + page
+      ? query = _api + page
+      : query = _api + _productParam + page
     axios.get(query)
-        .then(response => {
-            resolve(adapter(response))
-        })
-        .catch(error => {
-            console.warn(`Error in API ${error}`)
-            reject(error)
-        })
+      .then(response => {
+          resolve(adapter(response))
+      })
+      .catch(error => {
+          console.warn(`Error in API ${error}`)
+          reject(error)
+      })
 })
