@@ -59,17 +59,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'result-list',
     computed: {
-        ...mapGetters([
+        ...mapGetters('products', [
             'allProducts'
         ])
     },
     created () {
-        this.$store.dispatch('FETCH_ALL_DATA', {
+        this.$store.dispatch('products/FETCH_ALL_DATA', {
             page: 1,
             typePagination: 'next'
         })

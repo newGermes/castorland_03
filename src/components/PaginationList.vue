@@ -34,7 +34,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
+        ...mapGetters('products',[
             'nextReferencePage',
             'stateNumericPagination',
             'stateMoreButton'
@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getPage(page, typePagination) {
-            return this.$store.dispatch('FETCH_ALL_DATA', {
+            return this.$store.dispatch('products/FETCH_ALL_DATA', {
                 page,
                 typePagination
             })
